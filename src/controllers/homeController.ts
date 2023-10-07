@@ -4,7 +4,9 @@ import { Product } from "../models/Product";
 import User from "../models/User";
 
 export const home = async (req: Request, res: Response) => {
-  let usuarios = await User.find({});
+  let usuarios = await User.find({
+    age: { $gt: 40, $lt: 60 },
+  });
   console.log("USUARIOS", usuarios);
 
   let age: number = 90;
