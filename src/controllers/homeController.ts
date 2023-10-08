@@ -5,8 +5,9 @@ import User from "../models/User";
 
 export const home = async (req: Request, res: Response) => {
   let usuarios = await User.find({
-    age: { $gt: 40, $lt: 60 },
-  });
+    age: { $gt: 18 },
+  }).sort({ "name.firstName": 1, "name.lastName": 1 });
+
   console.log("USUARIOS", usuarios);
 
   let age: number = 90;
