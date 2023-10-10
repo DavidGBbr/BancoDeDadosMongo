@@ -59,3 +59,17 @@ export const addUserAction = async (req: Request, res: Response) => {
       .send("Ocorreu um erro ao inserir o usuário no banco de dados.");
   }
 };
+
+export const incrementAgeAction = async (req: Request, res: Response) => {
+  let id = req.params.id;
+
+  let user = await User.findOne({ _id: id });
+  if (user) {
+    user.age++;
+    user.save();
+  } else {
+    console.log("Erro na incrementação");
+  }
+
+  res.redirect("/");
+};
