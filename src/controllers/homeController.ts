@@ -4,13 +4,27 @@ import { Product } from "../models/Product";
 import User from "../models/User";
 
 export const home = async (req: Request, res: Response) => {
-  let usuarios = await User.find({
-    age: { $gt: 18 },
-  })
-    .skip(0)
-    .limit(2);
+  /*
+1ª forma:
 
-  console.log("USUARIOS", usuarios);
+  let newUser = await User.create({
+    name: { firstName: "Monaliza", lastName: "Fernandes" },
+    email: "mona@paris.org",
+    age: 200,
+    interests: ["arte", "pizza"],
+  });
+
+  console.log("NOVO USUÁRIO", newUser);
+*/
+  //2ª forma:
+  let newUser = new User();
+  newUser.name = { firstName: "André", lastName: "Soares" };
+  newUser.email = "andre@hotmail.com";
+  newUser.age = 35;
+  newUser.interests = ["programação", "skate"];
+  let resultado = await newUser.save();
+
+  console.log("NOVO USUÁRIO", resultado);
 
   let age: number = 90;
   let showOld: boolean = false;
